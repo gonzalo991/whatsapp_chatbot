@@ -1,0 +1,13 @@
+Hola  👋
+Bienvenido a Inka Thaya. A continuación indique el número para la operación que desea realizar:
+1. Conocer nuestros productos 🛍️
+2. Problemas técnicos ⚠️
+3. Hacer una consulta 💬
+4. Comunicarse con un agente 👩‍💻
+5. Salir 🚪
+
+Esta es una respuesta automática 🤖, en este momento nuestros agentes están ocupados.
+
+🕒 Horarios de atención:
+📅 De Lunes a Viernes 
+⏰ 8:00 am a 16:00 pm
