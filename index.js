@@ -5,7 +5,7 @@ const path = require("path");
 const fs = require('fs');
 const connection = require("./src/database/connection.database");
 const { loadSession, saveSession } = require('./src/controllers/session.controller');
-const {mainFlow} = require('./src/utils/mainflow');
+const { mainFlow } = require('./src/utils/main.flow');
 dotenv.config({ path: "./.env" });
 
 // Inicializar el cliente de WhatsApp
@@ -50,16 +50,8 @@ dotenv.config({ path: "./.env" });
         }
     });
 
+    // Flujo de los mensaje recibidos
     mainFlow(client);
-
-    /*
-    client.on("message", (message) => {
-        
-        if (message.body.includes("hola")) {
-            message.reply(menuContent);
-        }
-    });
-    */
 
     client.on("disconnected", (reason) => {
         console.log("Client disconnected due to:", reason);

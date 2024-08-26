@@ -1,5 +1,4 @@
-Hola  👋
-Bienvenido a Inka Thaya. A continuación indique el número para la operación que desea realizar:
+A continuación indique el número para la operación que desea realizar:
 1. Conocer nuestros productos 🛍️
 2. Problemas técnicos ⚠️
 3. Hacer una consulta 💬

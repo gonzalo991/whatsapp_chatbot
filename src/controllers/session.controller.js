@@ -1,12 +1,13 @@
-const Session = require('../models/session_model');
+const {Session} = require('../models/session_model');
 
 // Loading the user session from database
 const loadSession = async () => {
     const sessionLoaded = await Session.findOne();
     if (sessionLoaded) {
         return sessionLoaded.sessionData;
+    } else {
+        return null;
     }
-    return null;
 }
 
 // Saving the new session on database
@@ -27,4 +28,4 @@ const saveSession = async (session) => {
     }
 };
 
-module.exports = {loadSession, saveSession};
+module.exports = { loadSession, saveSession };
