@@ -1,4 +1,4 @@
-const {Session} = require('../models/session_model');
+const Session = require('../models/session_model');
 
 // Loading the user session from database
 const loadSession = async () => {
@@ -28,4 +28,9 @@ const saveSession = async (session) => {
     }
 };
 
-module.exports = { loadSession, saveSession };
+const deleteSession = async (_id) => {
+    await Session.findByIdAndDelete(_id);
+    console.log(`Session timed out from database.`);
+}
+
+module.exports = { loadSession, saveSession, deleteSession };

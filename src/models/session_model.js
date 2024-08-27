@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const sessionSchema = new mongoose.Schema({
+const sessionSchema = new Schema({
     sessionData: {
         type: Object,
         required: true,

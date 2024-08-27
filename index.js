@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const fs = require('fs');
 const connection = require("./src/database/connection.database");
-const { loadSession, saveSession } = require('./src/controllers/session.controller');
+const { loadSession, saveSession, deleteSession } = require('./src/controllers/session.controller');
 const { mainFlow } = require('./src/utils/main.flow');
 dotenv.config({ path: "./.env" });
 
@@ -27,6 +27,8 @@ dotenv.config({ path: "./.env" });
         if (!existingSession) {
             console.log("Scan the QR code below:");
             qrcode.generate(qr, { small: true });
+        } else {
+            console.log(`Already have a session: ${existingSession}`);
         }
     });
 
@@ -54,21 +56,31 @@ dotenv.config({ path: "./.env" });
     mainFlow(client);
 
     client.on("disconnected", (reason) => {
-        console.log("Client disconnected due to:", reason);
         // Intentar reconectar basado en la razón de desconexión
         if (reason === "UNPAIRED" || reason === "UNLAUNCHED") {
             console.log("Client is unpaired or unlaunched, restarting...");
             client.destroy();  // Destruir la instancia del cliente
-            client.initialize();  // Re-inicializar el cliente
+            setTimeout(() => {
+                client.initialize();  // Re-inicializar el cliente después de un tiempo de espera
+            }, 5000);  // Reintento de reconexión en 5 segundos
         } else if (reason === "CONFLICT") {
             console.log("Conflict detected, attempting to reconnect...");
-            client.initialize();  // Re-inicializar el cliente
+            setTimeout(() => {
+                client.initialize();  // Re-inicializar el cliente después de un tiempo de espera
+            }, 5000);  // Reintento de reconexión en 5 segundos
+        }
+        else if (reason === "LOGOUT") {
+            const _id = existingSession._id;
+            deleteSession(_id);
+            console.log("Client disconnected successfully!");
+            client.logout();
         } else {
             console.log("Attempting to reconnect...");
             setTimeout(() => {
                 client.initialize();  // Re-inicializar el cliente después de un tiempo de espera
             }, 5000);  // Reintento de reconexión en 5 segundos
         }
+        console.log("Client disconnected due to:", reason);
     });
 
     client.initialize();
