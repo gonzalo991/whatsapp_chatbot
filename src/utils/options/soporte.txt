@@ -1,0 +1,11 @@
+Elija la opción correspondiente y será atendido por nuestro equipo 👩‍💻:
+
+1. Quiero contratar un servicio 🤝
+2. Me gustaría saber los medio de pago 💳
+3. Me interesa una app móvil para mi negocio 📲
+4. Necesito una actualización en mi web ⌨️
+5. Quiero analizar una cantidad importante de datos 📈
+6. Me interesa contratar el servicio de software para mi empresa 🖥️
+
+
+0. Volver al menú principal

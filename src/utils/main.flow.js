@@ -1,6 +1,8 @@
 const path = require("path");
 const fs = require('fs');
 const { evaluar } = require('./evaluar_opciones');
+const productosFlow = require('./productos.flow');
+const soporteFlow = require('./soporte.flow');
 
 const mainFlow = (client) => {
     let userSessions = {};  // Objeto en memoria para rastrear el estado de cada usuario
@@ -11,7 +13,8 @@ const mainFlow = (client) => {
     // const volverAlMenu = "Si desea volver al menú principal, responda: 'Menu'.";
 
     client.on("message", async (message) => {
-        if (mensajeUsuario.body.includes("hola") || mensajeUsuario.body.includes("menu")) {
+
+        if (message.body.includes("consulta") || message.body.includes("menu")) {
             const userId = message.from;  // Identificar al usuario por su número
             const mensajeUsuario = message.body.trim().toLowerCase();
 
@@ -24,22 +27,23 @@ const mainFlow = (client) => {
                 await message.reply(welcome);
             }
 
+            // A partir de aqui se puede modularizar en otro archivo
+
             userSessions[userId] = evaluar(mensajeUsuario, userSessions[userId]);
 
             // Manejo de la lógica de respuesta según la etapa
+            // Nota: probar que no entre en bucle infinito
             switch (userSessions[userId].stage) {
                 case "menu":
                     await message.reply(menuContent);
                     delete userSessions[userId];
                     break;
                 case "productos":
-                    // productosFlow()
-                    await message.reply("productos");
-                    delete userSessions[userId];
+                    productosFlow(message, userSessions[userId]);
+                    delete userSessions[userId]; // oara serrar la session del usuarios y evitar el infinito
                     break;
                 case "soporte":
-                    // soporteFlow()
-                    await message.reply("soporte");
+                    soporteFlow(message, userSessions[userId]);
                     delete userSessions[userId];
                     break;
                 case "consultas":
