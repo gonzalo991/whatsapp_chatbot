@@ -9,8 +9,6 @@
 ## Características principales
 - 📲 Responde automáticamente a mensajes de WhatsApp.
 - 🌐 Se integra con servicios externos (APIs).
-- 🧠 Procesa lenguaje natural para interactuar de manera más fluida.
-- 📊 Genera reportes automáticos.
 
 
 ## Uso
