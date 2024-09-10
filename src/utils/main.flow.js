@@ -14,7 +14,7 @@ const mainFlow = (client) => {
 
     client.on("message", async (message) => {
 
-        if (message.body.includes("consulta") || message.body.includes("menu")) {
+        if (message.body.toLowerCase().includes("consulta") || message.body.toLowerCase().includes("menu") || message.body.toLowerCase().includes("menú")) {
             const userId = message.from;  // Identificar al usuario por su número
             const mensajeUsuario = message.body.trim().toLowerCase();
 
