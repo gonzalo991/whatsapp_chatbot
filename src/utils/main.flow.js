@@ -3,6 +3,7 @@ const fs = require('fs');
 const { evaluar } = require('./evaluar_opciones');
 const productosFlow = require('./productos.flow');
 const soporteFlow = require('./soporte.flow');
+const consultasFlow = require("./consultas.flow");
 
 const mainFlow = (client) => {
     let userSessions = {};  // Objeto en memoria para rastrear el estado de cada usuario
@@ -10,7 +11,6 @@ const mainFlow = (client) => {
     const welcomePath = path.join(__dirname, "options", "bienvenida.txt");
     const menuContent = fs.readFileSync(menuPath, "utf8");
     const welcome = fs.readFileSync(welcomePath, "utf8");
-    // const volverAlMenu = "Si desea volver al menú principal, responda: 'Menu'.";
 
     client.on("message", async (message) => {
 
@@ -36,7 +36,6 @@ const mainFlow = (client) => {
             switch (userSessions[userId].stage) {
                 case "menu":
                     await message.reply(menuContent);
-                    delete userSessions[userId];
                     break;
                 case "productos":
                     productosFlow(message, userSessions[userId]);
@@ -47,13 +46,11 @@ const mainFlow = (client) => {
                     delete userSessions[userId];
                     break;
                 case "consultas":
-                    //consultasFlow()
-                    await message.reply("consultas");
+                    consultasFlow(message, userSessions[userId]);
                     delete userSessions[userId];
                     break;
                 case "agente":
-                    // agenteFlow()
-                    await message.reply("agente");
+                    await message.reply("Un agente de servicio se comunicará con usted a la brevedad. Muchas gracias.");
                     delete userSessions[userId];
                     break;
                 case "salir":

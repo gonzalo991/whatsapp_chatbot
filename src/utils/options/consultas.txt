@@ -1,0 +1,9 @@
+🙋🏻‍♂️ Cual es su consulta ? :
+
+1. Necesito saber como contactarlos 📱
+2. Mi app necesita soporte y actualizaciones ⚙️
+3. Mi app no carga las imágenes 🌉
+4. Mi servicio está caido ⛔
+5. Quiero agregar funcionalidades a mi app 💱
+
+0. Volver al menú
